@@ -1,5 +1,6 @@
 import 'package:bag_it/network/network.dart';
 import 'package:bag_it/utils/screen_utils/screen_utils.dart';
+import 'package:bag_it/views/onboarding.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -91,6 +92,11 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
 
+                SizedBox(height: 40,),
+               ElevatedButton(onPressed: (){
+                 Network().signOutUser();
+                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>OnboardingScreen()));
+               }, child: Text("SignOut") )
               ],
             ),
           ),

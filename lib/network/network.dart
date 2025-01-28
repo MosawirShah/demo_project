@@ -1,3 +1,4 @@
+import 'package:bag_it/views/onboarding.dart';
 import 'package:bag_it/views/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,10 +12,22 @@ class Network{
 
 
   //check Current user
-  Future<User> checkCurrentUser(BuildContext context)async{
-    User currentUser = await _auth.currentUser!;
-     return currentUser;
+  Future<void> checkCurrentUser(BuildContext context)async{
+    User? currentUser = await _auth.currentUser;
+    if (currentUser != null) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => HomePage()));
+    } else {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => OnboardingScreen()));
+    }
+    }
+
+    //signOut
+  signOutUser(){
+    _auth.signOut();
   }
+
 
   //Register a user
   registerUser(BuildContext context, String email, String password)async{
